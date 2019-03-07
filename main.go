@@ -42,7 +42,7 @@ func main() {
 		log.Fatal("Please provide a valid password")
 	}
 
-	// Configure cognito client from AWS SDK
+	// Configure Cognito client from AWS SDK
 	cfg, err := external.LoadDefaultAWSConfig()
 	if err != nil {
 		log.Fatal(fmt.Sprintf("Error loading default AWS config: %s", err))
