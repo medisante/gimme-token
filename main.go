@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
@@ -23,6 +24,7 @@ const (
 )
 
 func main() {
+	ctx := context.Background()
 	// Get username from the flags the program was called with
 	var username string
 	flag.StringVar(&username, "username", "", "Your username")
@@ -68,7 +70,7 @@ func main() {
 		log.Fatal(fmt.Sprintf("Error validating InitiateAuth input: %s", err))
 	}
 	req := cognitoClient.InitiateAuthRequest(input)
-	resp, err := req.Send()
+	resp, err := req.Send(ctx)
 	if err != nil {
 		log.Fatal(fmt.Sprintf("Error sending InitiateAuth request: %s", err))
 	}
@@ -86,7 +88,7 @@ func main() {
 		log.Fatal(fmt.Sprintf("Error validating challenge input: %s", err))
 	}
 	chalReq := cognitoClient.RespondToAuthChallengeRequest(challengeInput)
-	chalResp, err := chalReq.Send()
+	chalResp, err := chalReq.Send(ctx)
 	if err != nil {
 		log.Fatal(fmt.Sprintf("Error sending challenge request: %s", err))
 	}
