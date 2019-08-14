@@ -1,10 +1,13 @@
-.PHONY: run lint
+.PHONY: all lint test clean
 
-build:
+all:
 	go build -o bin/gimme-token .
 
 lint:
-	golangci-lint run --enable-all
+	golangci-lint run
+
+test:
+	go test -race -cover ./...
 
 clean:
 	rm -rf bin
