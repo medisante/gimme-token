@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"log"
-	"syscall"
+	"os"
 	"time"
 
 	cognitosrp "github.com/alexrudd/cognito-srp"
@@ -35,7 +35,7 @@ func main() {
 
 	// Get password from the user's input so it isn't stored in their shell history
 	fmt.Print("Enter your password: ")
-	bytePassword, err := terminal.ReadPassword(syscall.Stdin)
+	bytePassword, err := terminal.ReadPassword(int(os.Stdin.Fd()))
 	if err != nil {
 		log.Fatal(fmt.Sprintf("error reading password: %s", err))
 	}
